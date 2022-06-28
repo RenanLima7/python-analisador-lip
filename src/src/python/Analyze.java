@@ -25,8 +25,8 @@ public class Analyze {
 			File files = new File(addr);
 			caminhoArquivo = files.list();
 
-			 for (int i = 0; i < caminhoArquivo.length; i++) {
-		            System.out.println(i+1 + " - " + caminhoArquivo[i]);
+			 for (int i = 0; i < caminhoArquivos.length; i++) {
+		            System.out.println(i+1 + " - " + caminhoArquivos[i]);
 		        }
 			
 			String path = addr;
