@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Analyze {
@@ -17,6 +19,15 @@ public class Analyze {
 			System.out.println("Digite o endereço do arquivo: Ex:(C:/Users/Usuário/Desktop/exemplo-soma-python.txt)");
 			Scanner in = new Scanner(System.in);
 			String addr = in.next();
+			
+			String[] caminhoArquivos;
+
+			File files = new File(addr);
+			caminhoArquivo = files.list();
+
+			 for (int i = 0; i < caminhoArquivo.length; i++) {
+		            System.out.println(i+1 + " - " + caminhoArquivo[i]);
+		        }
 			
 			String path = addr;
 			String textArq = "";
