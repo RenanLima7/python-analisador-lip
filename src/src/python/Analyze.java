@@ -1,73 +1,46 @@
 package python;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Analyze {
 
-	public static void main(String[] args) {
-		
-		while(true) {
-			
-			System.out.println("Digite o endereço do arquivo: Ex:(C:/Users/Usuário/Desktop/exemplo-soma-python.txt)");
-			Scanner in = new Scanner(System.in);
-			String addr = in.next();
-			
-			String[] caminhoArquivos;
+	@SuppressWarnings("resource")
+	public static void main(String[] args) throws IOException {
+		Scanner leitor = new Scanner(System.in);
+		int opcao = -1;
 
-			File files = new File(addr);
-			caminhoArquivos = files.list();
+		while (true && opcao != 0) {
+			System.out.println("Digite o caminho do diretorio!");
+			System.out.println("Ex:(C:\\Users\\Renan\\git\\python-analisador-lip\\exemplos\\)\n");
+			String caminho = leitor.next();
+			System.out.println("\n===============================================================");
 
-			 for (int i = 0; i < caminhoArquivos.length; i++) {
-		            System.out.println(i+1 + " - " + caminhoArquivos[i]);
-		        }
-			
-			String path = addr;
-			String textArq = "";
-			
 			try {
-				File arq = new File(path);
-				FileReader flArq = new FileReader(arq);
-				BufferedReader br = new BufferedReader(flArq);
-				
-				while(br.ready()){ 
-					textArq = textArq + br.readLine();
-					textArq = textArq + "\n";
-				} 
-				br.close();
-				
-				System.out.println(textArq);
-				System.out.println("-------------------------");
-				System.out.println();
-				
-				Python pLex = new Python(new StringReader(textArq));
-				
-				while(true) {
-					Token token = pLex.yylex();
-					
-					if(token == null) {
-						break;
-					}
-					
-					if(pLex.lexeme.equals("\t") | pLex.lexeme.equals("   ") | pLex.lexeme.equals("\n")) {
-						System.out.println(token);
+				String[] arquivos = FileManager.pegarArquivosNoDiretorio(caminho);
+				FileManager.lerArquivosNoDiretorio(arquivos);
+
+				System.out.println("===============================================================");
+				System.out.println("Digite o numero do arquivo desejado!");
+				System.out.println("\nCaso deseje sair, digite 0!\n");
+				opcao = leitor.nextInt();
+				System.out.println("===============================================================\n");
+
+				if (opcao == 0) {
+					continue;
+				} else {
+					String arquivoSelecionado = FileManager.pegarCaminhoDoArquivo(caminho, opcao);
+					Boolean valid = FileManager.validarCaminho(arquivoSelecionado);
+
+					if (valid) {
+						FileManager.lerArquivoSelecionado(arquivoSelecionado);
 					} else {
-						System.out.println(token + " -> " + pLex.lexeme);
+						System.out.println("Arquivo invalido");
 					}
 				}
-				break;
-				
-			} catch (FileNotFoundException e) {
-				System.out.println("Arquivo não encontrado!");
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (Exception e) {
+				System.out.println("Caminho invalido, por favor tente novamente!");
+				System.out.println("===============================================================");
 			}
 		}
 	}
