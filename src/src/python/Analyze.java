@@ -23,7 +23,7 @@ public class Analyze {
 			String[] caminhoArquivos;
 
 			File files = new File(addr);
-			caminhoArquivo = files.list();
+			caminhoArquivos = files.list();
 
 			 for (int i = 0; i < caminhoArquivos.length; i++) {
 		            System.out.println(i+1 + " - " + caminhoArquivos[i]);
