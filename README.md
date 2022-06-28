@@ -22,7 +22,7 @@ java -jar PythonAnalisador.jar
 
 **Atenção** ⚠
 
-Ao inicar, a aplicação solicitará o endereço do arquivo na qual será realizado a análise. Colocamos alguns exemplos em `/exemplos`, caso dejese criar um arquivo para teste o mesmo deve ser .txt e conter código escrito em linguagem Python.
+Ao inicar, a aplicação solicitará o endereço do diretório onde estão os arquivos que serão realizados a análise. Colocamos alguns exemplos em `/exemplos`, caso dejese criar um arquivo para teste o mesmo deve ser .txt e conter código escrito em linguagem Python.
 
 Digite ou cole o endereço do arquivo, como o exemplo a seguir: 
 
